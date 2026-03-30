@@ -7,14 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "faker"
 
-# Category.destroy_all
-# Product.destroy_all
+puts "Clearing old data..."
+Product.destroy_all
+Category.destroy_all
 
-rods = Category.create!(name: "Fishing Rods")
-reels = Category.create!(name: "Reels")
-lures = Category.create!(name: "Lures")
-tackle = Category.create!(name: "Tackle")
+puts "Creating categories..."
+
+rods   = Category.find_or_create_by!(name: "Fishing Rods")
+reels  = Category.find_or_create_by!(name: "Reels")
+lures  = Category.find_or_create_by!(name: "Lures")
+tackle = Category.find_or_create_by!(name: "Tackle")
+
+puts "Creating manual fishing products..."
 
 Product.create!(
   name: "Shimano Spinning Rod",
@@ -51,6 +57,7 @@ Product.create!(
   brand: "Plano",
   category: tackle
 )
+
 Product.create!(
   name: "Ugly Stik GX2 Rod",
   description: "A strong and sensitive rod ideal for beginners and experienced anglers.",
@@ -105,21 +112,21 @@ Product.create!(
   category: tackle
 )
 
-require 'faker'
+puts "Adding Faker products..."
 
 categories = [rods, reels, lures, tackle]
 
-if Product.count < 100
-  puts "Adding Faker products..."
-
-  (100 - Product.count).times do
-    Product.create!(
-      name: Faker::Commerce.product_name,
-      description: Faker::Lorem.sentence(word_count: 12),
-      price: Faker::Commerce.price(range: 10.0..200.0),
-      stock: rand(5..50),
-      brand: Faker::Commerce.brand,
-      category: categories.sample
-    )
-  end
+(100 - Product.count).times do
+  Product.create!(
+    name: Faker::Commerce.product_name,
+    description: Faker::Lorem.sentence(word_count: 12),
+    price: Faker::Commerce.price(range: 10.0..200.0),
+    stock: rand(5..50),
+    brand: Faker::Commerce.brand,
+    category: categories.sample
+  )
 end
+
+puts "Done!"
+puts "Categories: #{Category.count}"
+puts "Products: #{Product.count}"
