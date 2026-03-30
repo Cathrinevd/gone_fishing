@@ -8,8 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Category.destroy_all
-Product.destroy_all
+# Category.destroy_all
+# Product.destroy_all
 
 rods = Category.create!(name: "Fishing Rods")
 reels = Category.create!(name: "Reels")
@@ -104,3 +104,22 @@ Product.create!(
   brand: "Trilene",
   category: tackle
 )
+
+require 'faker'
+
+categories = [rods, reels, lures, tackle]
+
+if Product.count < 100
+  puts "Adding Faker products..."
+
+  (100 - Product.count).times do
+    Product.create!(
+      name: Faker::Commerce.product_name,
+      description: Faker::Lorem.sentence(word_count: 12),
+      price: Faker::Commerce.price(range: 10.0..200.0),
+      stock: rand(5..50),
+      brand: Faker::Commerce.brand,
+      category: categories.sample
+    )
+  end
+end
