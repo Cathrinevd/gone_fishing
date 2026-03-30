@@ -51,3 +51,56 @@ Product.create!(
   brand: "Plano",
   category: tackle
 )
+Product.create!(
+  name: "Ugly Stik GX2 Rod",
+  description: "A strong and sensitive rod ideal for beginners and experienced anglers.",
+  price: 69.99,
+  stock: 12,
+  brand: "Ugly Stik",
+  category: rods
+)
+
+Product.create!(
+  name: "Shimano Sedona Reel",
+  description: "A smooth spinning reel with durable construction.",
+  price: 99.99,
+  stock: 6,
+  brand: "Shimano",
+  category: reels
+)
+
+Product.create!(
+  name: "Spinnerbait Lure",
+  description: "A versatile lure for catching bass in various conditions.",
+  price: 8.99,
+  stock: 30,
+  brand: "Strike King",
+  category: lures
+)
+
+Product.create!(
+  name: "Soft Plastic Worms",
+  description: "Flexible bait designed to mimic real worms for freshwater fishing.",
+  price: 5.99,
+  stock: 50,
+  brand: "Berkley",
+  category: lures
+)
+
+Product.create!(
+  name: "Fishing Hook Kit",
+  description: "A variety pack of hooks for different fishing styles.",
+  price: 14.99,
+  stock: 20,
+  brand: "Eagle Claw",
+  category: tackle
+)
+
+Product.create!(
+  name: "Fishing Line 10lb",
+  description: "Strong monofilament fishing line suitable for most freshwater fishing.",
+  price: 11.99,
+  stock: 40,
+  brand: "Trilene",
+  category: tackle
+)
