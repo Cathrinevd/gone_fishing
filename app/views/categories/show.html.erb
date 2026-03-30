@@ -2,6 +2,9 @@
 
 <% @products.each do |product| %>
   <div>
+    <% if product.image.attached? %>
+      <%= image_tag product.image, width: 150 %>
+    <% end %>
     <h3><%= link_to product.name, product_path(product) %></h3>
     <p><%= product.description %></p>
     <p>$<%= product.price %></p>

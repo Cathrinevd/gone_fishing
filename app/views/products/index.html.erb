@@ -1,13 +1,32 @@
 <h1>Gone Fishing</h1>
 
+<%= link_to "Add New Product", new_product_path %>
+
+<hr>
+
+<h2>Categories</h2>
+
+<% Category.all.each do |category| %>
+  <p><%= link_to category.name, category_path(category) %></p>
+<% end %>
+
+<hr>
+
 <h2>All Products</h2>
 
 <% @products.each do |product| %>
   <div>
+
+    <% if product.image.attached? %>
+      <%= image_tag product.image, width: 150 %>
+    <% end %>
+
     <h3><%= link_to product.name, product_path(product) %></h3>
+
     <p><%= product.description %></p>
     <p>Brand: <%= product.brand %></p>
     <p>Price: $<%= product.price %></p>
+
   </div>
   <hr>
 <% end %>
