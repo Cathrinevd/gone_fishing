@@ -1,6 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 # Example:
 #
@@ -9,124 +6,124 @@
 #   end
 require "faker"
 
-puts "Clearing old data..."
+Rails.logger.debug "Clearing old data..."
 Product.destroy_all
 Category.destroy_all
 
-puts "Creating categories..."
+Rails.logger.debug "Creating categories..."
 
 rods   = Category.find_or_create_by!(name: "Fishing Rods")
 reels  = Category.find_or_create_by!(name: "Reels")
 lures  = Category.find_or_create_by!(name: "Lures")
 tackle = Category.find_or_create_by!(name: "Tackle")
 
-puts "Creating manual fishing products..."
+Rails.logger.debug "Creating manual fishing products..."
 
 Product.create!(
-  name: "Shimano Spinning Rod",
+  name:        "Shimano Spinning Rod",
   description: "A lightweight spinning rod designed for freshwater fishing.",
-  price: 89.99,
-  stock: 10,
-  brand: "Shimano",
-  category: rods
+  price:       89.99,
+  stock:       10,
+  brand:       "Shimano",
+  category:    rods
 )
 
 Product.create!(
-  name: "Abu Garcia Reel",
+  name:        "Abu Garcia Reel",
   description: "A durable reel with smooth casting performance.",
-  price: 79.99,
-  stock: 8,
-  brand: "Abu Garcia",
-  category: reels
+  price:       79.99,
+  stock:       8,
+  brand:       "Abu Garcia",
+  category:    reels
 )
 
 Product.create!(
-  name: "Crankbait Lure",
+  name:        "Crankbait Lure",
   description: "A bright crankbait lure for attracting walleye and pike.",
-  price: 12.99,
-  stock: 25,
-  brand: "Rapala",
-  category: lures
+  price:       12.99,
+  stock:       25,
+  brand:       "Rapala",
+  category:    lures
 )
 
 Product.create!(
-  name: "Tackle Box Organizer",
+  name:        "Tackle Box Organizer",
   description: "A compact tackle box with adjustable compartments.",
-  price: 24.99,
-  stock: 15,
-  brand: "Plano",
-  category: tackle
+  price:       24.99,
+  stock:       15,
+  brand:       "Plano",
+  category:    tackle
 )
 
 Product.create!(
-  name: "Ugly Stik GX2 Rod",
+  name:        "Ugly Stik GX2 Rod",
   description: "A strong and sensitive rod ideal for beginners and experienced anglers.",
-  price: 69.99,
-  stock: 12,
-  brand: "Ugly Stik",
-  category: rods
+  price:       69.99,
+  stock:       12,
+  brand:       "Ugly Stik",
+  category:    rods
 )
 
 Product.create!(
-  name: "Shimano Sedona Reel",
+  name:        "Shimano Sedona Reel",
   description: "A smooth spinning reel with durable construction.",
-  price: 99.99,
-  stock: 6,
-  brand: "Shimano",
-  category: reels
+  price:       99.99,
+  stock:       6,
+  brand:       "Shimano",
+  category:    reels
 )
 
 Product.create!(
-  name: "Spinnerbait Lure",
+  name:        "Spinnerbait Lure",
   description: "A versatile lure for catching bass in various conditions.",
-  price: 8.99,
-  stock: 30,
-  brand: "Strike King",
-  category: lures
+  price:       8.99,
+  stock:       30,
+  brand:       "Strike King",
+  category:    lures
 )
 
 Product.create!(
-  name: "Soft Plastic Worms",
+  name:        "Soft Plastic Worms",
   description: "Flexible bait designed to mimic real worms for freshwater fishing.",
-  price: 5.99,
-  stock: 50,
-  brand: "Berkley",
-  category: lures
+  price:       5.99,
+  stock:       50,
+  brand:       "Berkley",
+  category:    lures
 )
 
 Product.create!(
-  name: "Fishing Hook Kit",
+  name:        "Fishing Hook Kit",
   description: "A variety pack of hooks for different fishing styles.",
-  price: 14.99,
-  stock: 20,
-  brand: "Eagle Claw",
-  category: tackle
+  price:       14.99,
+  stock:       20,
+  brand:       "Eagle Claw",
+  category:    tackle
 )
 
 Product.create!(
-  name: "Fishing Line 10lb",
+  name:        "Fishing Line 10lb",
   description: "Strong monofilament fishing line suitable for most freshwater fishing.",
-  price: 11.99,
-  stock: 40,
-  brand: "Trilene",
-  category: tackle
+  price:       11.99,
+  stock:       40,
+  brand:       "Trilene",
+  category:    tackle
 )
 
-puts "Adding Faker products..."
+Rails.logger.debug "Adding Faker products..."
 
 categories = [rods, reels, lures, tackle]
 
 (100 - Product.count).times do
   Product.create!(
-    name: Faker::Commerce.product_name,
+    name:        Faker::Commerce.product_name,
     description: Faker::Lorem.sentence(word_count: 12),
-    price: Faker::Commerce.price(range: 10.0..200.0),
-    stock: rand(5..50),
-    brand: Faker::Commerce.brand,
-    category: categories.sample
+    price:       Faker::Commerce.price(range: 10.0..200.0),
+    stock:       rand(5..50),
+    brand:       Faker::Commerce.brand,
+    category:    categories.sample
   )
 end
 
-puts "Done!"
-puts "Categories: #{Category.count}"
-puts "Products: #{Product.count}"
+Rails.logger.debug "Done!"
+Rails.logger.debug { "Categories: #{Category.count}" }
+Rails.logger.debug { "Products: #{Product.count}" }

@@ -11,18 +11,18 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
   def create
     @product = Product.new(product_params)
 
     if @product.save
       redirect_to @product
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
-  end
-
-  def edit
-    @product = Product.find(params[:id])
   end
 
   def update
@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to @product
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -44,6 +44,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :stock, :brand, :category_id, :image)
+    params.require(:product).permit(:name, :description, :price, :stock, :brand, :category_id,
+                                    :image)
   end
 end
