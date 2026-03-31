@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
   end
+
   def new
     @product = Product.new
   end
@@ -16,7 +17,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to @product
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -30,8 +31,14 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to @product
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to products_path, notice: "Product deleted successfully"
   end
 
   private

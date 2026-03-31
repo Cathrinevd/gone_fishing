@@ -9,3 +9,5 @@
 <p>Stock: <%= @product.stock %></p>
 
 <%= link_to "Back to Products", root_path %>
+<%= link_to "Edit Product", edit_product_path(@product) %>
+<%= button_to "Delete Product", product_path(@product), method: :delete, form: { data: { turbo: false } } %>
