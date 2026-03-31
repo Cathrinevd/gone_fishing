@@ -61,3 +61,4 @@ end
 
 gem 'rubocop-rails'
 gem 'sassc-rails'
+gem 'devise'
