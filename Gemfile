@@ -44,7 +44,6 @@ group :development, :test do
   gem "brakeman", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
@@ -52,7 +51,6 @@ group :development do
   gem "web-console"
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
-  gem "error_highlight", ">= 0.4.0", platforms: [ :ruby ]
 end
 
 group :test do
@@ -60,3 +58,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'rubocop-rails'
+gem 'sassc-rails'
