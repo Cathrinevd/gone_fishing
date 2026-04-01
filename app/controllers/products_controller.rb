@@ -2,9 +2,16 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
 
+    if params[:query].present?
+      @products = @products.where("name LIKE ? OR description LIKE ?", "%#{params[:query]}%",
+                                  "%#{params[:query]}%")
+    end
+
+    @products = @products.where(category_id: params[:category_id]) if params[:category_id].present?
     if params[:filter] == "new"
       @products = @products.where("created_at >= ?", 10.minutes.ago)
       @products = @products.order(created_at: :desc)
+
     elsif params[:filter] == "recently_updated"
       @products = @products.where("updated_at >= ?", 10.minutes.ago)
       @products = @products.order(updated_at: :desc)

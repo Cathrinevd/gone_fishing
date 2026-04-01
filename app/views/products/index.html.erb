@@ -20,6 +20,28 @@
 
 <hr>
 
+<h2>Search Products</h2>
+
+<%= form_with url: products_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :query, "Keyword" %>
+    <%= text_field_tag :query, params[:query] %>
+  </div>
+
+  <div>
+    <%= label_tag :category_id, "Category" %>
+    <%= select_tag :category_id,
+        options_from_collection_for_select(Category.all, :id, :name, params[:category_id]),
+        include_blank: "All Categories" %>
+  </div>
+
+  <div>
+    <%= submit_tag "Search" %>
+  </div>
+<% end %>
+
+<hr>
+
 <h2>All Products</h2>
 
 <% @products.each do |product| %>
