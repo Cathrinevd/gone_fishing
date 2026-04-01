@@ -12,6 +12,14 @@
 
 <hr>
 
+<h2>Filter Products</h2>
+
+<%= link_to "All", products_path %> |
+<%= link_to "New (last 3 days)", products_path(filter: "new") %> |
+<%= link_to "Recently Updated", products_path(filter: "recently_updated") %>
+
+<hr>
+
 <h2>All Products</h2>
 
 <% @products.each do |product| %>
@@ -26,6 +34,8 @@
     <p><%= product.description %></p>
     <p>Brand: <%= product.brand %></p>
     <p>Price: $<%= product.price %></p>
+    <p>Created: <%= product.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+    <p>Updated: <%= product.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
 
   </div>
   <hr>

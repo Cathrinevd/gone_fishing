@@ -1,6 +1,18 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.page(params[:page]).per(10)
+    @products = Product.all
+
+    if params[:filter] == "new"
+      @products = @products.where("created_at >= ?", 10.minutes.ago)
+      @products = @products.order(created_at: :desc)
+    elsif params[:filter] == "recently_updated"
+      @products = @products.where("updated_at >= ?", 10.minutes.ago)
+      @products = @products.order(updated_at: :desc)
+    else
+      @products = @products.order(created_at: :desc)
+    end
+
+    @products = @products.page(params[:page]).per(10)
   end
 
   def show
