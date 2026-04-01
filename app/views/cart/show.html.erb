@@ -1,0 +1,19 @@
+<div class="container py-4">
+  <h1 class="mb-4">Shopping Cart</h1>
+
+  <% if @products.any? %>
+    <% @products.each do |product| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5><%= product.name %></h5>
+          <p><%= product.description %></p>
+          <p><strong>Price:</strong> $<%= product.price %></p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Your cart is empty.</p>
+  <% end %>
+
+  <%= link_to "Back to Products", products_path, class: "btn btn-secondary" %>
+</div>

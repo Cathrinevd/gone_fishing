@@ -8,6 +8,7 @@
 <p>Price: $<%= @product.price %></p>
 <p>Stock: <%= @product.stock %></p>
 
+<%= button_to "Add to Cart", add_to_cart_path(@product), method: :post, class: "btn btn-primary me-2" %>
 <%= link_to "Back to Products", root_path %>
 <%= link_to "Edit Product", edit_product_path(@product) %>
 <%= button_to "Delete Product", product_path(@product), method: :delete, form: { data: { turbo: false } } %>
