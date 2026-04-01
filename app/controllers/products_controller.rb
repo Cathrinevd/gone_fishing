@@ -10,13 +10,13 @@ class ProductsController < ApplicationController
     @products = @products.where(category_id: params[:category_id]) if params[:category_id].present?
     if params[:filter] == "new"
       @products = @products.where("created_at >= ?", 10.minutes.ago)
-      @products = @products.order(created_at: :desc)
+      @products = @products.order(created_at: :asc)
 
     elsif params[:filter] == "recently_updated"
       @products = @products.where("updated_at >= ?", 10.minutes.ago)
-      @products = @products.order(updated_at: :desc)
+      @products = @products.order(updated_at: :asc)
     else
-      @products = @products.order(created_at: :desc)
+      @products = @products.order(created_at: :asc)
     end
 
     @products = @products.page(params[:page]).per(10)
