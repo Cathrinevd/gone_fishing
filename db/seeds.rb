@@ -127,3 +127,4 @@ end
 Rails.logger.debug "Done!"
 Rails.logger.debug { "Categories: #{Category.count}" }
 Rails.logger.debug { "Products: #{Product.count}" }
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
