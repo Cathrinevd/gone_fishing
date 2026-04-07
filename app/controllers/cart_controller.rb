@@ -2,7 +2,14 @@ class CartController < ApplicationController
   before_action :normalize_cart
 
   def show
-    @products = Product.find(session[:cart].keys)
+    cart_ids = session[:cart].keys
+
+    # Load only existing products
+    @products = Product.where(id: cart_ids)
+
+    # Remove non-existing product IDs
+    missing_ids = cart_ids.map(&:to_s) - @products.pluck(:id).map(&:to_s)
+    missing_ids.each { |id| session[:cart].delete(id) }
   end
 
   def add
