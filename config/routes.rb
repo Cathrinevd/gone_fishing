@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   patch "cart/update/:id", to: "cart#update_quantity", as: "update_cart"
   get "checkout", to: "checkout#show"
   post "checkout/place_order", to: "checkout#place_order", as: "place_order"
+  get "/pages/:title", to: "pages#show", as: :page
 end
