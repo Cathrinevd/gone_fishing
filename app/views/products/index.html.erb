@@ -1,30 +1,43 @@
-<div class="d-flex justify-content-between align-items-start mb-4">
-  <h1 class="mb-0">Gone Fishing</h1>
+<div class="container mt-3">
 
-  <div class="d-flex flex-column align-items-end gap-2">
-    <% if user_signed_in? %>
+  <!-- HEADER -->
+  <div class="d-flex justify-content-between align-items-start mb-4">
+    <h1 class="mb-0">Gone Fishing</h1>
+
+    <div class="d-flex flex-column align-items-end gap-2">
+
+      <!-- Top row -->
       <div class="d-flex align-items-center gap-2">
-        <span>Logged in as <%= current_user.email %></span>
-        <%= link_to "Log Out",
-            destroy_user_session_path,
-            data: { turbo_method: :delete },
-            class: "btn btn-outline-dark btn-sm" %>
-      </div>
-    <% else %>
-      <div class="d-flex gap-2">
-        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-dark btn-sm" %>
-        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-dark btn-sm" %>
-      </div>
-    <% end %>
+        <%= link_to "About", page_path("About"), class: "btn btn-outline-secondary btn-sm" %>
+        <%= link_to "Contact", page_path("Contact"), class: "btn btn-outline-secondary btn-sm" %>
 
-    <div class="d-flex gap-2">
-      <%= link_to "View Cart", cart_path, class: "btn btn-outline-dark" %>
-      <%= link_to "Add New Product", new_product_path, class: "btn btn-outline-dark" %>
+        <div class="vr mx-2"></div>
+
+        <% if user_signed_in? %>
+          <span class="small">Logged in as <%= current_user.email %></span>
+          <%= link_to "Log Out",
+                destroy_user_session_path,
+                data: { turbo_method: :delete },
+                class: "btn btn-outline-dark btn-sm" %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-dark btn-sm" %>
+          <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-dark btn-sm" %>
+        <% end %>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="d-flex gap-2">
+        <%= link_to "View Cart", cart_path, class: "btn btn-outline-dark" %>
+        <%= link_to "Add New Product", new_product_path, class: "btn btn-outline-dark" %>
+      </div>
+
     </div>
   </div>
-</div>
 
+  <!-- MAIN CONTENT -->
   <div class="row g-4 mb-5">
+
+    <!-- Categories -->
     <div class="col-md-4 col-lg-3">
       <div class="card h-100 shadow-sm">
         <div class="card-header fw-semibold">
@@ -38,7 +51,9 @@
       </div>
     </div>
 
+    <!-- Filters + Search -->
     <div class="col-md-8 col-lg-9">
+
       <div class="card mb-3 shadow-sm">
         <div class="card-header fw-semibold">
           Filter Products
@@ -57,6 +72,7 @@
         <div class="card-body">
           <%= form_with url: products_path, method: :get, local: true do %>
             <div class="row g-3 align-items-end">
+
               <div class="col-md-5">
                 <%= label_tag :query, "Keyword", class: "form-label" %>
                 <%= text_field_tag :query, params[:query], class: "form-control" %>
@@ -73,19 +89,23 @@
               <div class="col-md-3">
                 <%= submit_tag "Search", class: "btn btn-dark w-100" %>
               </div>
+
             </div>
           <% end %>
         </div>
       </div>
+
     </div>
   </div>
 
+  <!-- PRODUCTS -->
   <h2 class="mb-4">All Products</h2>
 
   <div class="row">
     <% @products.each do |product| %>
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card h-100 shadow-sm">
+
           <% if product.image.attached? %>
             <%= image_tag product.image, class: "card-img-top", style: "height: 220px; object-fit: cover;" %>
           <% end %>
@@ -105,6 +125,7 @@
               <%= link_to "View Product", product_path(product), class: "btn btn-outline-primary btn-sm" %>
             </div>
           </div>
+
         </div>
       </div>
     <% end %>
@@ -113,4 +134,5 @@
   <div class="mt-4">
     <%= paginate @products %>
   </div>
+
 </div>
